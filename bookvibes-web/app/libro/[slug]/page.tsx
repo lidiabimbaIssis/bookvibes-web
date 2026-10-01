@@ -60,11 +60,12 @@ export default async function BookPage({
           </h1>
 
           <Link
-            href={`/autor/${encodeURIComponent(createSlug(book.author))}`}
-            className="mt-2 inline-block text-[17px] text-copper no-underline hover:text-brass"
-          >
-            {book.author}
-          </Link>
+  href={`/autor/${encodeURIComponent(createSlug(book.author))}`}
+  className="mt-2 inline-flex items-center gap-1 text-[17px] text-copper no-underline transition-colors duration-150 hover:text-brass active:text-brass"
+>
+  <span>{book.author}</span>
+  <span className="text-[14px]">→</span>
+</Link>
 
           {/* DATOS DEL LIBRO */}
           <div className="mt-5 flex flex-wrap gap-2">
@@ -112,18 +113,18 @@ export default async function BookPage({
           ) : null}
 
           {/* TAGS */}
-          {tags.length > 0 ? (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {tags.map((tag: any, index: number) => (
-                <span
-                  key={`${tag.label}-${index}`}
-                  className="rounded-full border border-white/10 bg-surface px-3 py-1 text-[12px] font-bold"
-                >
-                  {tag.label}
-                </span>
-              ))}
-            </div>
-          ) : null}
+{tags.length > 0 ? (
+  <div className="mt-3 flex flex-wrap gap-2">
+    {tags.map((tag: any, index: number) => (
+      <span
+        key={`${tag.label}-${index}`}
+className="rounded-full border border-white/25 bg-copper/10 px-3 py-1 text-[12px] font-bold text-white"
+>
+        {tag.label}
+      </span>
+    ))}
+  </div>
+) : null}
 
           {/* SINOPSIS */}
           {book.sinopsis ? (

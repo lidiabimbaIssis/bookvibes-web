@@ -8,13 +8,13 @@ export function BookCard({ book }: { book: Book }) {
       href={`/libro/${book.slug}`}
       className="group flex flex-col no-underline"
     >
-      <div className="book-glow overflow-hidden rounded-[12px]">
+      <div className="book-glow book-cover-interaction overflow-hidden rounded-[12px]">
         <BookCover book={book} />
       </div>
 
-<p className="font-display mt-2.5 text-[14px] leading-snug font-bold text-fg transition-all duration-200 group-hover:font-black">
-  {book.title}
-</p>
+      <p className="font-display mt-2.5 text-[14px] leading-snug font-bold text-fg transition-all duration-200 group-hover:font-black">
+        {book.title}
+      </p>
 
       <p className="mt-0.5 text-[12px] text-brass">
         {book.author}

@@ -220,6 +220,8 @@
   transition: transform 650ms ease;
 }
 
+/* ---------- Brillo de portadas ---------- */
+
 .book-glow {
   isolation: isolate;
   transition:
@@ -229,12 +231,38 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.book-glow:hover {
-  transform: translateY(-6px) scale(1.04);
-  filter: brightness(1.18) saturate(1.08);
+/* Portátil / ratón: hover */
+@media (hover: hover) and (pointer: fine) {
+  .book-glow:hover {
+    transform: translateY(-6px) scale(1.04);
+    filter: brightness(1.18) saturate(1.08);
+    box-shadow:
+      0 0 22px rgb(69 183 245 / 0.45),
+      0 0 48px rgb(154 60 209 / 0.28);
+  }
+}
+
+/* Móvil / táctil: al pulsar (dedo abajo) y al marcar con el clic
+   (clase .is-pressed que pone el componente antes de navegar).
+   También cubre teclado con focus-visible. */
+.book-glow:active,
+a:active .book-glow,
+a:focus-visible .book-glow,
+.book-glow.is-pressed {
+  transform: translateY(-4px) scale(1.05);
+  filter: brightness(1.25) saturate(1.12);
   box-shadow:
-    0 0 22px rgb(69 183 245 / 0.45),
-    0 0 48px rgb(154 60 209 / 0.28);
+    0 0 26px rgb(69 183 245 / 0.6),
+    0 0 56px rgb(154 60 209 / 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-glow,
+  .book-glow:active,
+  .book-glow.is-pressed {
+    transition: box-shadow 200ms ease, filter 200ms ease;
+    transform: none;
+  }
 }
 
 .bg-brass-copper {
@@ -250,14 +278,6 @@
 
 .tagline-glow {
   text-shadow: 0 0 10px rgb(69 183 245 / 0.45);
-}
-
-@media (hover: none) and (pointer: coarse) {
-  .book-glow:hover {
-    transform: none;
-    filter: none;
-    box-shadow: none;
-  }
 }
 
 @media (hover: none) and (pointer: coarse) {
