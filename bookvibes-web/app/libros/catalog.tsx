@@ -220,54 +220,27 @@ export function Catalog() {
         />
       </div>
 
-      {/* Géneros */}
-      <div className="mt-4">
-        {/* MÓVIL */}
-        <div className="relative sm:hidden">
-          <button
-            type="button"
-            onClick={() => setGenreOpen((current) => !current)}
-            className="flex w-full items-center justify-between rounded-full border border-white/10 bg-surface px-4 py-3 text-[13px] font-bold"
-          >
-            <span>
-              {genre === "Todos" ? "Todos los géneros" : genre}
-            </span>
+{/* Géneros */}
+{mood === "Todos" && (
+  <div className="mt-4">
+    {/* MÓVIL */}
+    <div className="relative sm:hidden">
+      <button
+        type="button"
+        onClick={() => setGenreOpen((current) => !current)}
+        className="flex w-full items-center justify-between rounded-full border border-white/10 bg-surface px-4 py-3 text-[13px] font-bold"
+      >
+        <span>
+          {genre === "Todos" ? "Todos los géneros" : genre}
+        </span>
 
-            <span className="text-muted">
-              {genreOpen ? "⌃" : "⌄"}
-            </span>
-          </button>
+        <span className="text-muted">
+          {genreOpen ? "⌃" : "⌄"}
+        </span>
+      </button>
 
-          {genreOpen && (
-            <div className="absolute left-0 right-0 top-full z-20 mt-2 max-h-80 overflow-y-auto rounded-2xl border border-white/10 bg-surface p-2 shadow-2xl">
-              {WEB_GENRES.map((item) => {
-                const active = genre === item.label;
-
-                return (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => {
-                      setGenre(item.label);
-                      setGenreOpen(false);
-                    }}
-                    className={cn(
-                      "block w-full rounded-xl px-4 py-2.5 text-left text-[13px] font-semibold",
-                      active
-                        ? "bg-white/10 text-fg"
-                        : "text-muted hover:bg-white/5 hover:text-fg",
-                    )}
-                  >
-                    {item.label}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* ORDENADOR */}
-        <div className="hidden flex-wrap gap-2 sm:flex">
+      {genreOpen && (
+        <div className="absolute left-0 right-0 top-full z-20 mt-2 max-h-80 overflow-y-auto rounded-2xl border border-white/10 bg-surface p-2 shadow-2xl">
           {WEB_GENRES.map((item) => {
             const active = genre === item.label;
 
@@ -275,12 +248,15 @@ export function Catalog() {
               <button
                 key={item.label}
                 type="button"
-                onClick={() => setGenre(item.label)}
+                onClick={() => {
+                  setGenre(item.label);
+                  setGenreOpen(false);
+                }}
                 className={cn(
-                  "rounded-full border px-3 py-1.5 text-[12px] font-bold transition",
+                  "block w-full rounded-xl px-4 py-2.5 text-left text-[13px] font-semibold",
                   active
-                    ? "border-transparent bg-surface text-fg [background:linear-gradient(var(--color-surface),var(--color-surface))_padding-box,linear-gradient(90deg,var(--color-brass),var(--color-copper))_border-box]"
-                    : "border-white/10 bg-surface text-fg hover:border-white/20",
+                    ? "bg-white/10 text-fg"
+                    : "text-muted hover:bg-white/5 hover:text-fg",
                 )}
               >
                 {item.label}
@@ -288,12 +264,37 @@ export function Catalog() {
             );
           })}
         </div>
+      )}
+    </div>
 
-        <span className="mt-2 block text-[12px] text-muted">
-          {loading ? "Cargando…" : `${filteredBooks.length} libros`}
-        </span>
-      </div>
+    {/* ORDENADOR */}
+    <div className="hidden flex-wrap gap-2 sm:flex">
+      {WEB_GENRES.map((item) => {
+        const active = genre === item.label;
 
+        return (
+          <button
+            key={item.label}
+            type="button"
+            onClick={() => setGenre(item.label)}
+            className={cn(
+              "rounded-full border px-3 py-1.5 text-[12px] font-bold transition",
+              active
+                ? "border-transparent bg-surface text-fg [background:linear-gradient(var(--color-surface),var(--color-surface))_padding-box,linear-gradient(90deg,var(--color-brass),var(--color-copper))_border-box]"
+                : "border-white/10 bg-surface text-fg hover:border-white/20",
+            )}
+          >
+            {item.label}
+          </button>
+        );
+      })}
+    </div>
+  </div>
+)}
+
+<span className="mt-2 block text-[12px] text-muted">
+  {loading ? "Cargando…" : `${filteredBooks.length} libros`}
+</span>
       {/* Resultados */}
       {loading ? (
         <div className="mt-12 text-center text-[13px] text-muted">

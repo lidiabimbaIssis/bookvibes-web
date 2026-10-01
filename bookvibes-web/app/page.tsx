@@ -83,12 +83,12 @@ export default async function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-4 sm:px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="novedades-glow text-[18px] font-extrabold">
+            <h2 className="novedades-glow text-[30px] font-extrabold">
               Novedades
             </h2>
 
             <p className="mt-0.5 text-[12px] text-muted">
-              Las últimas historias que han entrado en BookVibes.
+              Cada día, nuevas historias para descubrir.
             </p>
           </div>
 
