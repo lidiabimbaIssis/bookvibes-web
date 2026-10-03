@@ -24,7 +24,7 @@ export default async function Home() {
     .slice(0, 8)
     .map((book: Book) => ({
       ...book,
-      slug: book.slug || createSlug(book.title),
+      slug: `${createSlug(book.title)}--${book.book_id}`,
     })) as Book[];
 
   return (
@@ -33,7 +33,7 @@ export default async function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
         <div className="hero-panel grid items-center gap-6 overflow-hidden rounded-[28px] lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="px-6 py-10 sm:px-10 lg:py-14">
+          <div className="px-6 py-10 sm:px-10 lg:py-10">
             <p className="text-[11px] font-extrabold tracking-[0.28em] text-brass uppercase">
               Siente lo que lees
             </p>
@@ -66,7 +66,7 @@ export default async function Home() {
             <img
               src="/hero-window.jpg"
               alt="Chica leyendo junto a la ventana, de noche"
-              className="absolute inset-0 size-full object-contain object-center"
+              className="absolute inset-0 size-full scale-[1.10] object-contain object-center"
             />
 
             <p className="font-display pointer-events-none absolute right-4 bottom-4 text-right text-[15px] text-fg italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-[17px]">
@@ -83,11 +83,11 @@ export default async function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-4 sm:px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="novedades-glow text-[30px] font-extrabold">
+            <h2 className="novedades-glow text-[30px] leading-[1.05] font-extrabold">
               Novedades
             </h2>
 
-            <p className="mt-0.5 text-[12px] text-muted">
+            <p className="mt-2 text-[15px] leading-relaxed text-muted">
               Cada día, nuevas historias para descubrir.
             </p>
           </div>
@@ -110,12 +110,10 @@ export default async function Home() {
       {/* EL RINCÓN DEL LECTOR */}
       <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="relative overflow-hidden rounded-[26px] border border-white/10 bg-gradient-to-br from-[#09051a] via-[#10082a] to-[#080b20] px-5 py-7 sm:px-7 sm:py-8">
-
           <div className="pointer-events-none absolute -right-16 -top-20 size-52 rounded-full bg-copper/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 left-1/3 size-52 rounded-full bg-brass/10 blur-3xl" />
 
           <div className="relative">
-
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-[10px] font-extrabold tracking-[0.24em] text-brass uppercase">
@@ -145,7 +143,6 @@ export default async function Home() {
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
-
           </div>
         </div>
       </section>

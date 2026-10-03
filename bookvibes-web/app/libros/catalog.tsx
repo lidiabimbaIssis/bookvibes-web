@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 import { BookCard } from "@/components/book-card";
 import { VibeIcon } from "@/components/vibe-grid";
 import { VIBES } from "@/data/books";
-import { getBooks } from "@/lib/api";
+import { getCatalog } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 const BOOKS_PER_PAGE = 48;
@@ -55,6 +55,41 @@ function normalize(value: unknown) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
+}
+
+// Semilla aleatoria guardada por sesión: dentro de una visita el orden no
+// cambia (al volver atrás ves lo mismo) y en otra visita sale distinto.
+function getSessionSeed() {
+  try {
+    const saved = sessionStorage.getItem("bv-shuffle-seed");
+    if (saved) return Number(saved);
+
+    const fresh = Math.floor(Math.random() * 2 ** 31);
+    sessionStorage.setItem("bv-shuffle-seed", String(fresh));
+    return fresh;
+  } catch {
+    return Math.floor(Math.random() * 2 ** 31);
+  }
+}
+
+function seededShuffle<T>(items: T[], seed: number) {
+  const arr = [...items];
+  let s = seed >>> 0;
+
+  const rand = () => {
+    s = (s + 0x6d2b79f5) >>> 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr;
 }
 
 function matchesGenre(book: any, terms: string[]) {
@@ -120,14 +155,16 @@ export function Catalog() {
   useEffect(() => {
     async function loadBooks() {
       try {
-        const data = await getBooks();
+        const data = await getCatalog();
 
         const realBooks = (data.books || []).map((book: any) => ({
           ...book,
-          slug: book.slug || createSlug(book.title),
+          // El book_id va al final del slug para poder pedir SOLO ese libro
+          // al abrir la ficha (sin descargar todo el catálogo).
+          slug: `${createSlug(book.title)}--${book.book_id}`,
         }));
 
-        setBooks(realBooks);
+        setBooks(seededShuffle(realBooks, getSessionSeed()));
       } catch (error) {
         console.error("Error cargando libros:", error);
         setBooks([]);

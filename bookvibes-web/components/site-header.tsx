@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, Search, X } from "lucide-react";
+import { Heart, Menu, Search, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 export function SiteHeader() {
@@ -23,6 +23,14 @@ export function SiteHeader() {
             Libros
           </Link>
 
+          <Link
+            href="/favoritos"
+            className="flex items-center gap-1.5 no-underline hover:text-fg"
+          >
+            <Heart className="size-4" />
+            <span>Favoritos</span>
+          </Link>
+
           <Link href="/tienda" className="hover:text-fg">
             Tienda
           </Link>
@@ -35,7 +43,11 @@ export function SiteHeader() {
             Contacto
           </Link>
 
-          <Link href="/libros" className="hover:text-fg" aria-label="Buscar">
+          <Link
+            href="/libros"
+            className="hover:text-fg"
+            aria-label="Buscar"
+          >
             <Search className="size-4" />
           </Link>
 
@@ -97,6 +109,15 @@ export function SiteHeader() {
               className="rounded-xl px-4 py-3 text-muted hover:bg-surface hover:text-fg"
             >
               Libros
+            </Link>
+
+            <Link
+              href="/favoritos"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 rounded-xl px-4 py-3 text-muted hover:bg-surface hover:text-fg"
+            >
+              <Heart className="size-4" />
+              Favoritos
             </Link>
 
             <Link

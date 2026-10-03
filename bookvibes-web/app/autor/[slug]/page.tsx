@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookCard } from "@/components/book-card";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
-import { getBooks } from "@/lib/api";
+import { getAuthorIndex } from "@/lib/catalog";
 
 function createSlug(value: string) {
   return value
@@ -20,8 +20,7 @@ export default async function AuthorPage({
 }) {
   const { slug } = await params;
 
-  const data = await getBooks();
-  const books = data.books || [];
+  const books = await getAuthorIndex();
 
   const authorBooks = books.filter(
     (book: any) =>
@@ -67,7 +66,7 @@ export default async function AuthorPage({
               key={book.book_id}
               book={{
                 ...book,
-                slug: createSlug(book.title),
+                slug: `${createSlug(book.title)}--${book.book_id}`,
               }}
             />
           ))}

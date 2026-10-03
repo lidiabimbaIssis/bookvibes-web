@@ -15,10 +15,10 @@ export function AppCtaBand() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:py-16">
         <img
-          src="/brand-wordmark.png"
-          alt="BookVibes. Siente lo que lees"
-          className="w-full max-w-[560px] justify-self-center drop-shadow-[0_0_40px_rgba(69,183,245,0.28)] lg:justify-self-start"
-        />
+  src="/bookvibes-app.png"
+  alt="La aplicación BookVibes"
+  className="w-full max-w-[590px] justify-self-center drop-shadow-[0_0_40px_rgba(69,183,245,0.28)] lg:justify-self-start"
+/>
 
         <div>
           <h2 className="text-[26px] leading-tight font-extrabold text-balance sm:text-[30px]">
