@@ -41,9 +41,13 @@ async function fetchFeed(): Promise<any[]> {
 
   // no-store a propósito: la respuesta completa pesa más de 2 MB y la caché
   // de fetch de Next no la guarda. La guardamos en memoria (abajo).
+   // La respuesta pesa más de 2 MB y la caché de fetch de Next no la guarda
+  // (solo avisa en logs). La caché real es la de memoria (abajo). Usamos
+  // revalidate en vez de no-store para que las fichas ISR no den
+  // DYNAMIC_SERVER_USAGE.
   const res = await fetch(
     `${apiUrl}/api/books/feed?count=${CATALOG_COUNT}`,
-    { cache: "no-store" },
+    { next: { revalidate: 3600 } },
   );
 
   if (!res.ok) {
