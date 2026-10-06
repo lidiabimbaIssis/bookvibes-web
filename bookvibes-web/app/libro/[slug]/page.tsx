@@ -230,47 +230,80 @@ export default async function BookPage({
             </h2>
 
             {/* FUNCIONES DE LA APP */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
-                  <Headphones className="size-4" />
-                </span>
+<div className="grid grid-cols-2 gap-3">
+  <div
+    tabIndex={0}
+    role="button"
+    className="group relative flex cursor-pointer items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3 outline-none"
+  >
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
+      <Headphones className="size-4" />
+    </span>
 
-                <span className="text-[13px] text-fg/90">
-                  Escucha el hook
-                </span>
-              </div>
+    <span className="text-[13px] text-fg/90">
+      Escucha el hook
+    </span>
 
-              <div className="flex items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
-                  <Heart className="size-4" />
-                </span>
+    <span className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-[#111026]/95 px-3 text-center text-[12px] font-extrabold text-sky-300 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100">
+      📱 Disponible en la app
+    </span>
+  </div>
 
-                <span className="text-[13px] text-fg/90">
-                  Descubre sus emociones
-                </span>
-              </div>
+  <div
+    tabIndex={0}
+    role="button"
+    className="group relative flex cursor-pointer items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3 outline-none"
+  >
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
+      <Heart className="size-4" />
+    </span>
 
-              <div className="flex items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
-                  <Sparkles className="size-4" />
-                </span>
+    <span className="text-[13px] text-fg/90">
+      Descubre sus emociones
+    </span>
 
-                <span className="text-[13px] text-fg/90">
-                  Encuentra libros según tu Vibe
-                </span>
-              </div>
+    <span className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-[#111026]/95 px-3 text-center text-[12px] font-extrabold text-sky-300 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100">
+      📱 Disponible en la app
+    </span>
+  </div>
 
-              <div className="flex items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
-                  <MessageCircle className="size-4" />
-                </span>
+  <div
+    tabIndex={0}
+    role="button"
+    className="group relative flex cursor-pointer items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3 outline-none"
+  >
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
+      <Sparkles className="size-4" />
+    </span>
 
-                <span className="text-[13px] text-fg/90">
-                  Habla con sus personajes
-                </span>
-              </div>
-            </div>
+    <span className="text-[13px] text-fg/90">
+      Encuentra libros según tu Vibe
+    </span>
+
+    <span className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-[#111026]/95 px-3 text-center text-[12px] font-extrabold text-sky-300 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100">
+      📱 Disponible en la app
+    </span>
+  </div>
+
+  <div
+    tabIndex={0}
+    role="button"
+    className="group relative flex cursor-pointer items-center gap-3 rounded-xl border border-violet-400/10 bg-violet-500/5 p-3 outline-none"
+  >
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-300">
+      <MessageCircle className="size-4" />
+    </span>
+
+    <span className="text-[13px] text-fg/90">
+      Habla con sus personajes
+    </span>
+
+    <span className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-[#111026]/95 px-3 text-center text-[12px] font-extrabold text-sky-300 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100">
+      📱 Disponible en la app
+    </span>
+  </div>
+</div>
+            
 
             {/* FRASE */}
             <p className="mt-5 text-center text-[16px] leading-relaxed font-semibold text-fg">
