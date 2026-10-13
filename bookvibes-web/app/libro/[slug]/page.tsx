@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { notFound } from "next/navigation";
@@ -42,6 +43,48 @@ async function findBook(slug: string) {
   const id = slug.includes("--") ? slug.split("--").pop() || "" : slug;
 
   return getFullBook(id, slug);
+}
+
+// Título, descripción y URL oficial de cada ficha para Google.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const book = await findBook(slug);
+
+  if (!book) {
+    return { title: "Libro no encontrado", robots: { index: false } };
+  }
+
+  const canonical = `/libro/${createSlug(book.title)}--${book.book_id}`;
+  const title = book.author ? `${book.title}, de ${book.author}` : book.title;
+
+  const rawDescription: string =
+    book.hook ||
+    book.sinopsis ||
+    `${book.title}${book.author ? ` de ${book.author}` : ""}: sinopsis, vibes y dónde comprarlo.`;
+
+  const description =
+    rawDescription.length > 160
+      ? `${rawDescription.slice(0, 157).trimEnd()}…`
+      : rawDescription;
+
+  const cover = `https://res.cloudinary.com/ddppclcl1/image/upload/w_600,q_auto,f_auto/v1780422197/${book.book_id}.webp`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: "book",
+      url: canonical,
+      title,
+      description,
+      images: [cover],
+    },
+  };
 }
 
 export default async function BookPage({

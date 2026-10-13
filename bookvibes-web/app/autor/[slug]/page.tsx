@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookCard } from "@/components/book-card";
@@ -11,6 +12,29 @@ function createSlug(value: string) {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+// Título y URL oficial de cada página de autor para Google.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const books = await getAuthorIndex();
+  const book = books.find(
+    (b: any) => createSlug(String(b.author || "").trim()) === slug,
+  );
+
+  if (!book) {
+    return { title: "Autor no encontrado", robots: { index: false } };
+  }
+
+  return {
+    title: `Libros de ${book.author}`,
+    description: `Todos los libros de ${book.author} en BookVibes: descubre cuál encaja con tu vibe y dónde comprarlo.`,
+    alternates: { canonical: `/autor/${slug}` },
+  };
 }
 
 export default async function AuthorPage({
